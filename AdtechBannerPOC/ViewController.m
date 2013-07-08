@@ -9,14 +9,15 @@
 #import "ViewController.h"
 
 @interface ViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
+{
+	ATInterstitialView *adtechInterstitialBanner;
+}
 
 @property (nonatomic, strong) IBOutlet ATBannerView *adtechORMMABanner;
 @property (nonatomic, strong) IBOutlet ATBannerView *adtechMRAIDBanner;
-@property (nonatomic, strong) ATInterstitialView *adtechInterstitialBanner;
 
 - (IBAction)loadORMMAButtonPressed:(id)sender;
 - (IBAction)loadMRAIDButtonPressed:(id)sender;
-- (IBAction)loadInterstitialButtonPressed:(id)sender;
 
 @end
 
@@ -25,6 +26,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	// Interstitial
+	ATAdtechAdConfiguration *interstitialConfiguration = [ATAdtechAdConfiguration configuration];
+    interstitialConfiguration.alias = @"testmraid";
+    interstitialConfiguration.networkID = 23;
+    interstitialConfiguration.subNetworkID = 10;
+	interstitialConfiguration.allowLocationServices = YES;
+	
+	adtechInterstitialBanner = [[ATInterstitialView alloc] init];
+	adtechInterstitialBanner.configuration = interstitialConfiguration;
+	adtechInterstitialBanner.delegate = self;
+	adtechInterstitialBanner.viewController = self;
+	
+	[adtechInterstitialBanner load];
 	
 	// ORMMA
 	ATAdtechAdConfiguration *ORMMAConfiguration = [ATAdtechAdConfiguration configuration];
@@ -69,23 +84,6 @@
 	[self.adtechMRAIDBanner load];
 }
 
-- (IBAction)loadInterstitialButtonPressed:(id)sender
-{
-	// Interstitial
-	ATAdtechAdConfiguration *interstitialConfiguration = [ATAdtechAdConfiguration configuration];
-    interstitialConfiguration.alias = @"testmraid";
-    interstitialConfiguration.networkID = 23;
-    interstitialConfiguration.subNetworkID = 10;
-	interstitialConfiguration.allowLocationServices = YES;
-	
-	self.adtechInterstitialBanner = [[ATInterstitialView alloc] init];
-	self.adtechInterstitialBanner.configuration = interstitialConfiguration;
-	self.adtechInterstitialBanner.delegate = self;
-	self.adtechInterstitialBanner.viewController = self;
-	
-	[self.adtechInterstitialBanner load];
-}
-
 #pragma mark - ATInterstitialViewDelegate
 
 - (void)didSuccessfullyFetchInterstitialAd:(ATInterstitialView*)view
@@ -95,7 +93,7 @@
 
 - (void)didHideInterstitialAd:(ATInterstitialView *)view
 {
-    self.adtechInterstitialBanner = nil;
+    adtechInterstitialBanner = nil;
 }
 
 @end
