@@ -74,6 +74,22 @@
 	[self.adtechMRAIDBanner load];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	self.adtechMRAIDBanner.visible = YES;
+	self.adtechORMMABanner.visible = YES;
+	
+	[super viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	
+	self.adtechMRAIDBanner.visible = NO;
+	self.adtechORMMABanner.visible = NO;
+}
+
 - (IBAction)loadORMMAButtonPressed:(id)sender
 {
 	[self.adtechORMMABanner load];
@@ -94,6 +110,13 @@
 - (void)didHideInterstitialAd:(ATInterstitialView *)view
 {
     adtechInterstitialBanner = nil;
+}
+
+#pragma mark - ATBannerViewDelegate
+
+- (void)didFetchNextAd:(ATBannerView *)view
+{
+	view.hidden = NO;
 }
 
 @end
