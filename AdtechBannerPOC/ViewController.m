@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 
+static CGFloat kORMMABannerHeight;
+static CGFloat kMRAIDBannerHeight;
+
 @interface ViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
 {
 	ATInterstitialView *adtechInterstitialBanner;
@@ -29,8 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	[self showCurrentViewSize];
 	
 	// Interstitial
 	ATAdtechAdConfiguration *interstitialConfiguration = [ATAdtechAdConfiguration configuration];
@@ -77,6 +78,27 @@
 	self.adtechMRAIDBanner.delegate = self;
 	
 	[self.adtechMRAIDBanner load];
+	
+	// Show middle View size and set default values for static members
+	self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
+											self.adtechORMMABanner.frame.size.height,
+											self.currentSizeView.frame.size.width,
+											self.view.frame.size.height - self.adtechORMMABanner.frame.size.height - self.adtechMRAIDBanner.frame.size.height
+											);
+	[self showCurrentViewSize];
+	
+	kORMMABannerHeight = self.adtechORMMABanner.frame.size.height;
+	kMRAIDBannerHeight = self.adtechMRAIDBanner.frame.size.height;
+}
+
+- (void)viewDidUnload
+{
+	self.adtechMRAIDBanner = nil;
+	self.adtechORMMABanner = nil;
+	self.currentSizeLabel = nil;
+	self.currentSizeView = nil;
+	
+	[super viewDidUnload];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -107,7 +129,11 @@
 
 - (void)showCurrentViewSize
 {
-	self.currentSizeLabel.text = [NSString stringWithFormat:@"W: %f x H: %f", self.currentSizeView.frame.size.width, self.currentSizeView.frame.size.height];
+	self.currentSizeLabel.text = [NSString stringWithFormat:@"x: %.f, y: %.f - W: %.f x H: %.f",
+								  self.currentSizeView.frame.origin.x,
+								  self.currentSizeView.frame.origin.y,
+								  self.currentSizeView.frame.size.width,
+								  self.currentSizeView.frame.size.height];
 }
 
 #pragma mark - ATInterstitialViewDelegate
@@ -127,6 +153,32 @@
 - (void)didFetchNextAd:(ATBannerView *)view
 {
 	view.hidden = NO;
+}
+
+- (void)willResizeAd:(ATBannerView *)view toSize:(CGSize)size
+{
+	// Top banner resizes
+	if (self.adtechORMMABanner == view)
+	{
+		kORMMABannerHeight = size.height;
+		
+		self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
+												kORMMABannerHeight,
+												self.currentSizeView.frame.size.width,
+												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
+	}
+	// Bottom banner resizes
+	else if (self.adtechMRAIDBanner == view)
+	{
+		kMRAIDBannerHeight = size.height;
+		
+		self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
+												self.currentSizeView.frame.origin.y,
+												self.currentSizeView.frame.size.width,
+												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
+	}
+	
+	[self showCurrentViewSize];
 }
 
 @end
