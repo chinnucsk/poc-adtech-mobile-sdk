@@ -16,6 +16,9 @@
 @property (nonatomic, strong) IBOutlet ATBannerView *adtechORMMABanner;
 @property (nonatomic, strong) IBOutlet ATBannerView *adtechMRAIDBanner;
 
+@property (nonatomic, strong) IBOutlet UIView *currentSizeView;
+@property (nonatomic, strong) IBOutlet UILabel *currentSizeLabel;
+
 - (IBAction)loadORMMAButtonPressed:(id)sender;
 - (IBAction)loadMRAIDButtonPressed:(id)sender;
 
@@ -27,11 +30,13 @@
 {
     [super viewDidLoad];
 	
+	[self showCurrentViewSize];
+	
 	// Interstitial
 	ATAdtechAdConfiguration *interstitialConfiguration = [ATAdtechAdConfiguration configuration];
-    interstitialConfiguration.alias = @"testmraid";
+    interstitialConfiguration.alias = @"interstitial-top-5";
     interstitialConfiguration.networkID = 23;
-    interstitialConfiguration.subNetworkID = 10;
+    interstitialConfiguration.subNetworkID = 4;
 	interstitialConfiguration.allowLocationServices = YES;
 	
 	adtechInterstitialBanner = [[ATInterstitialView alloc] init];
@@ -98,6 +103,11 @@
 - (IBAction)loadMRAIDButtonPressed:(id)sender
 {
 	[self.adtechMRAIDBanner load];
+}
+
+- (void)showCurrentViewSize
+{
+	self.currentSizeLabel.text = [NSString stringWithFormat:@"W: %f x H: %f", self.currentSizeView.frame.size.width, self.currentSizeView.frame.size.height];
 }
 
 #pragma mark - ATInterstitialViewDelegate
