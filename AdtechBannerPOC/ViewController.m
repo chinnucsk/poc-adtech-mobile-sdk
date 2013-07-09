@@ -13,14 +13,14 @@ static CGFloat kMRAIDBannerHeight;
 
 @interface ViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
 {
-	ATInterstitialView *adtechInterstitialBanner;
+	ATInterstitialView *_interstitialBanner;
 }
 
-@property (nonatomic, strong) IBOutlet ATBannerView *adtechORMMABanner;
-@property (nonatomic, strong) IBOutlet ATBannerView *adtechMRAIDBanner;
+@property (nonatomic, strong) IBOutlet ATBannerView *ORMMABanner;
+@property (nonatomic, strong) IBOutlet ATBannerView *MRAIDBanner;
 
-@property (nonatomic, strong) IBOutlet UIView *currentSizeView;
-@property (nonatomic, strong) IBOutlet UILabel *currentSizeLabel;
+@property (nonatomic, strong) IBOutlet UIView *contentSizeView;
+@property (nonatomic, strong) IBOutlet UILabel *contentSizeLabel;
 
 - (IBAction)loadORMMAButtonPressed:(id)sender;
 - (IBAction)loadMRAIDButtonPressed:(id)sender;
@@ -34,77 +34,53 @@ static CGFloat kMRAIDBannerHeight;
     [super viewDidLoad];
 	
 	// Interstitial
-	ATAdtechAdConfiguration *interstitialConfiguration = [ATAdtechAdConfiguration configuration];
-    interstitialConfiguration.alias = @"interstitial-top-5";
-    interstitialConfiguration.networkID = 23;
-    interstitialConfiguration.subNetworkID = 4;
-	interstitialConfiguration.allowLocationServices = YES;
+	_interstitialBanner = [[ATInterstitialView alloc] init];
+	_interstitialBanner.configuration = [self configurationWithDomain:nil network:23 subNetwork:4 andAlias:@"interstitial-top-5"];
+	_interstitialBanner.delegate = self;
+	_interstitialBanner.viewController = self;
 	
-	adtechInterstitialBanner = [[ATInterstitialView alloc] init];
-	adtechInterstitialBanner.configuration = interstitialConfiguration;
-	adtechInterstitialBanner.delegate = self;
-	adtechInterstitialBanner.viewController = self;
+	[_interstitialBanner load];
 	
-	[adtechInterstitialBanner load];
+	// ORMMA	
+	self.ORMMABanner.configuration = [self configurationWithDomain:@"beta-a.adtech.de" network:23 subNetwork:10 andAlias:@"test"];
+	self.ORMMABanner.viewController = self;
+	self.ORMMABanner.delegate = self;
 	
-	// ORMMA
-	ATAdtechAdConfiguration *ORMMAConfiguration = [ATAdtechAdConfiguration configuration];
-	ORMMAConfiguration.alias = @"test";
-	ORMMAConfiguration.domain = @"beta-a.adtech.de";
-	ORMMAConfiguration.schema = @"http";
-	ORMMAConfiguration.port = 0;
-	ORMMAConfiguration.networkID = 23;
-	ORMMAConfiguration.subNetworkID = 10;
-	ORMMAConfiguration.allowLocationServices = YES;
-	
-	self.adtechORMMABanner.configuration = ORMMAConfiguration;
-	self.adtechORMMABanner.viewController = self;
-	self.adtechORMMABanner.delegate = self;
-	
-	[self.adtechORMMABanner load];
+	[self.ORMMABanner load];
 	
 	// MRAID
-	ATAdtechAdConfiguration *MRAIDConfiguration = [ATAdtechAdConfiguration configuration];
-	MRAIDConfiguration.alias = @"testmraid";
-	MRAIDConfiguration.domain = @"beta-a.adtech.de";
-	MRAIDConfiguration.schema = @"http";
-	MRAIDConfiguration.port = 0;
-	MRAIDConfiguration.networkID = 23;
-	MRAIDConfiguration.subNetworkID = 10;
-	MRAIDConfiguration.allowLocationServices = YES;
+	self.MRAIDBanner.configuration = [self configurationWithDomain:@"beta-a.adtech.de" network:23 subNetwork:10 andAlias:@"testmraid"];
+	self.MRAIDBanner.viewController = self;
+	self.MRAIDBanner.delegate = self;
 	
-	self.adtechMRAIDBanner.configuration = MRAIDConfiguration;
-	self.adtechMRAIDBanner.viewController = self;
-	self.adtechMRAIDBanner.delegate = self;
-	
-	[self.adtechMRAIDBanner load];
+	[self.MRAIDBanner load];
 	
 	// Show middle View size and set default values for static members
-	self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
-											self.adtechORMMABanner.frame.size.height,
-											self.currentSizeView.frame.size.width,
-											self.view.frame.size.height - self.adtechORMMABanner.frame.size.height - self.adtechMRAIDBanner.frame.size.height
+	self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
+											self.ORMMABanner.frame.size.height,
+											self.contentSizeView.frame.size.width,
+											self.view.frame.size.height - self.ORMMABanner.frame.size.height - self.MRAIDBanner.frame.size.height
 											);
-	[self showCurrentViewSize];
+	[self updateContentViewSizeLabel];
 	
-	kORMMABannerHeight = self.adtechORMMABanner.frame.size.height;
-	kMRAIDBannerHeight = self.adtechMRAIDBanner.frame.size.height;
+	kORMMABannerHeight = self.ORMMABanner.frame.size.height;
+	kMRAIDBannerHeight = self.MRAIDBanner.frame.size.height;
 }
 
 - (void)viewDidUnload
 {
-	self.adtechMRAIDBanner = nil;
-	self.adtechORMMABanner = nil;
-	self.currentSizeLabel = nil;
-	self.currentSizeView = nil;
+	self.MRAIDBanner = nil;
+	self.ORMMABanner = nil;
+	self.contentSizeLabel = nil;
+	self.contentSizeView = nil;
 	
 	[super viewDidUnload];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	self.adtechMRAIDBanner.visible = YES;
-	self.adtechORMMABanner.visible = YES;
+	self.MRAIDBanner.visible = YES;
+	self.ORMMABanner.visible = YES;
 	
 	[super viewDidAppear:animated];
 }
@@ -113,27 +89,48 @@ static CGFloat kMRAIDBannerHeight;
 {
 	[super viewDidDisappear:animated];
 	
-	self.adtechMRAIDBanner.visible = NO;
-	self.adtechORMMABanner.visible = NO;
+	self.MRAIDBanner.visible = NO;
+	self.ORMMABanner.visible = NO;
 }
 
 - (IBAction)loadORMMAButtonPressed:(id)sender
 {
-	[self.adtechORMMABanner load];
+	[self.ORMMABanner load];
 }
 
 - (IBAction)loadMRAIDButtonPressed:(id)sender
 {
-	[self.adtechMRAIDBanner load];
+	[self.MRAIDBanner load];
 }
 
-- (void)showCurrentViewSize
+- (void)updateContentViewSizeLabel
 {
-	self.currentSizeLabel.text = [NSString stringWithFormat:@"x: %.f, y: %.f - W: %.f x H: %.f",
-								  self.currentSizeView.frame.origin.x,
-								  self.currentSizeView.frame.origin.y,
-								  self.currentSizeView.frame.size.width,
-								  self.currentSizeView.frame.size.height];
+	self.contentSizeLabel.text = NSStringFromCGRect(self.contentSizeView.frame);
+}
+
+- (ATAdtechAdConfiguration *)configurationWithDomain:(NSString *)domain network:(NSUInteger)network subNetwork:(NSUInteger)subNetwork andAlias:(NSString *)alias
+{
+	ATAdtechAdConfiguration *configuration = [ATAdtechAdConfiguration configuration];
+	if (domain)
+	{
+		configuration.domain = domain;
+	}
+	if (network)
+	{
+		configuration.networkID = network;
+	}
+	if (subNetwork)
+	{
+		configuration.subNetworkID = subNetwork;
+	}
+	if (alias)
+	{
+		configuration.alias = alias;
+	}
+	
+	configuration.allowLocationServices = YES;
+	
+	return configuration;
 }
 
 #pragma mark - ATInterstitialViewDelegate
@@ -145,7 +142,7 @@ static CGFloat kMRAIDBannerHeight;
 
 - (void)didHideInterstitialAd:(ATInterstitialView *)view
 {
-    adtechInterstitialBanner = nil;
+    _interstitialBanner = nil;
 }
 
 #pragma mark - ATBannerViewDelegate
@@ -158,27 +155,27 @@ static CGFloat kMRAIDBannerHeight;
 - (void)willResizeAd:(ATBannerView *)view toSize:(CGSize)size
 {
 	// Top banner resizes
-	if (self.adtechORMMABanner == view)
+	if (self.ORMMABanner == view)
 	{
 		kORMMABannerHeight = size.height;
 		
-		self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
+		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
 												kORMMABannerHeight,
-												self.currentSizeView.frame.size.width,
+												self.contentSizeView.frame.size.width,
 												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
 	}
 	// Bottom banner resizes
-	else if (self.adtechMRAIDBanner == view)
+	else if (self.MRAIDBanner == view)
 	{
 		kMRAIDBannerHeight = size.height;
 		
-		self.currentSizeView.frame = CGRectMake(self.currentSizeView.frame.origin.x,
-												self.currentSizeView.frame.origin.y,
-												self.currentSizeView.frame.size.width,
+		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
+												self.contentSizeView.frame.origin.y,
+												self.contentSizeView.frame.size.width,
 												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
 	}
 	
-	[self showCurrentViewSize];
+	[self updateContentViewSizeLabel];
 }
 
 @end

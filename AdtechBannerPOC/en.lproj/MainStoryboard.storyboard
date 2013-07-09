@@ -70,10 +70,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="adtechMRAIDBanner" destination="sBz-W8-p0H" id="LTi-D8-TQZ"/>
-                        <outlet property="adtechORMMABanner" destination="gcm-u9-sOz" id="Qns-6N-OYZ"/>
-                        <outlet property="currentSizeLabel" destination="vyW-Os-oQm" id="dOw-HF-jHk"/>
-                        <outlet property="currentSizeView" destination="0CA-oc-WrD" id="bxp-Hc-GA8"/>
+                        <outlet property="MRAIDBanner" destination="sBz-W8-p0H" id="V7P-XS-ueD"/>
+                        <outlet property="ORMMABanner" destination="gcm-u9-sOz" id="vyj-xr-PFH"/>
+                        <outlet property="contentSizeLabel" destination="vyW-Os-oQm" id="GUO-rG-ABC"/>
+                        <outlet property="contentSizeView" destination="0CA-oc-WrD" id="NXL-9T-kWF"/>
                         <outlet property="view" destination="3" id="6cl-N3-7xI"/>
                     </connections>
                 </viewController>
