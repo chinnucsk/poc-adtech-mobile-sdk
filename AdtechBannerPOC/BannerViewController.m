@@ -6,14 +6,13 @@
 //  Copyright (c) 2013 RAM. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BannerViewController.h"
 
-static CGFloat kORMMABannerHeight;
-static CGFloat kMRAIDBannerHeight;
-
-@interface ViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
+@interface BannerViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
 {
 	ATInterstitialView *_interstitialBanner;
+	CGFloat _kORMMABannerHeight;
+	CGFloat _kMRAIDBannerHeight;
 }
 
 @property (nonatomic, strong) IBOutlet ATBannerView *ORMMABanner;
@@ -27,7 +26,9 @@ static CGFloat kMRAIDBannerHeight;
 
 @end
 
-@implementation ViewController
+
+
+@implementation BannerViewController
 
 - (void)viewDidLoad
 {
@@ -63,8 +64,8 @@ static CGFloat kMRAIDBannerHeight;
 											);
 	[self updateContentViewSizeLabel];
 	
-	kORMMABannerHeight = self.ORMMABanner.frame.size.height;
-	kMRAIDBannerHeight = self.MRAIDBanner.frame.size.height;
+	_kORMMABannerHeight = self.ORMMABanner.frame.size.height;
+	_kMRAIDBannerHeight = self.MRAIDBanner.frame.size.height;
 }
 
 - (void)viewDidUnload
@@ -157,22 +158,22 @@ static CGFloat kMRAIDBannerHeight;
 	// Top banner resizes
 	if (self.ORMMABanner == view)
 	{
-		kORMMABannerHeight = size.height;
+		_kORMMABannerHeight = size.height;
 		
 		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
-												kORMMABannerHeight,
+												_kORMMABannerHeight,
 												self.contentSizeView.frame.size.width,
-												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
+												self.view.frame.size.height - _kMRAIDBannerHeight - _kORMMABannerHeight);
 	}
 	// Bottom banner resizes
 	else if (self.MRAIDBanner == view)
 	{
-		kMRAIDBannerHeight = size.height;
+		_kMRAIDBannerHeight = size.height;
 		
 		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
 												self.contentSizeView.frame.origin.y,
 												self.contentSizeView.frame.size.width,
-												self.view.frame.size.height - kMRAIDBannerHeight - kORMMABannerHeight);
+												self.view.frame.size.height - _kMRAIDBannerHeight - _kORMMABannerHeight);
 	}
 	
 	[self updateContentViewSizeLabel];

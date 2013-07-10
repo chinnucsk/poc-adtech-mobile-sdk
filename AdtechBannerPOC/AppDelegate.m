@@ -12,7 +12,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [ATBaseConfiguration setLoggingLevel:kATLogVerbose];
+    [ATBaseConfiguration setLoggingLevel:kATLogError];
 	
     return YES;
 }
