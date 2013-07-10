@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdMobConfig</key>
+	<dict>
+		<key>AdditionalParameters</key>
+		<dict/>
+		<key>Keywords</key>
+		<array/>
+		<key>AdUnitID</key>
+		<string>a14f27d03f5dbd4</string>
+		<key>Gender</key>
+		<string>Male</string>
+		<key>TestDevices</key>
+		<dict>
+			<key>Item 0</key>
+			<string>Simulator</string>
+		</dict>
+	</dict>
 	<key>ADTECHConfig</key>
 	<dict>
 		<key>Schema</key>

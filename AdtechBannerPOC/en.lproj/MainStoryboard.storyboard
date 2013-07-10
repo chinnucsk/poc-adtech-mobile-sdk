@@ -20,7 +20,7 @@
                                         <rect key="frame" x="20" y="1" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Load ORMMA">
+                                        <state key="normal" title="Load AdMob">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -28,7 +28,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="loadORMMAButtonPressed:" destination="2" eventType="touchUpInside" id="yjM-2C-TgV"/>
+                                            <action selector="loadAdMobButtonPressed:" destination="2" eventType="touchUpInside" id="4tx-yZ-lF9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ni1-8x-N2e">
@@ -47,14 +47,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="View SIZE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vyW-Os-oQm">
-                                        <rect key="frame" x="20" y="220" width="199" height="21"/>
+                                        <rect key="frame" x="81" y="219" width="158" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="id0-xQ-458">
-                                        <rect key="frame" x="227" y="209" width="73" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="247" y="208" width="73" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Video">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,6 +66,18 @@
                                         <connections>
                                             <segue destination="kW3-Fp-f4F" kind="modal" id="Qjn-n5-5o4"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kJV-gh-cpy">
+                                        <rect key="frame" x="0.0" y="208" width="73" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Ads">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -85,8 +97,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="AdMobBanner" destination="gcm-u9-sOz" id="lj7-ek-l21"/>
                         <outlet property="MRAIDBanner" destination="sBz-W8-p0H" id="V7P-XS-ueD"/>
-                        <outlet property="ORMMABanner" destination="gcm-u9-sOz" id="vyj-xr-PFH"/>
                         <outlet property="contentSizeLabel" destination="vyW-Os-oQm" id="GUO-rG-ABC"/>
                         <outlet property="contentSizeView" destination="0CA-oc-WrD" id="NXL-9T-kWF"/>
                         <outlet property="view" destination="3" id="6cl-N3-7xI"/>
@@ -129,12 +141,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30a-SF-p77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="48"/>
+            <point key="canvasLocation" x="708" y="48"/>
         </scene>
     </scenes>
     <classes>
         <class className="ATBannerView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ATBannerView.h"/>
+        </class>
+        <class className="BannerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BannerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loadAdMobButtonPressed:"/>
+                <relationship kind="action" name="loadMRAIDButtonPressed:"/>
+                <relationship kind="outlet" name="AdMobBanner" candidateClass="ATBannerView"/>
+                <relationship kind="outlet" name="MRAIDBanner" candidateClass="ATBannerView"/>
+                <relationship kind="outlet" name="contentSizeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="contentSizeView" candidateClass="UIView"/>
+            </relationships>
         </class>
         <class className="VideoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VideoViewController.h"/>
