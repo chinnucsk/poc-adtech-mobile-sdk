@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 RAM. All rights reserved.
 //
 
-#import "BannerViewController.h"
+#import "ContentSizeViewController.h"
 
-@interface BannerViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
+@interface ContentSizeViewController () <ATBannerViewDelegate, ATInterstitialViewDelegate>
 {
 	ATInterstitialView *_interstitialBanner;
-	CGFloat _kAdMobBannerHeight;
+	CGFloat _kORMMABannerHeight;
 	CGFloat _kMRAIDBannerHeight;
 }
 
-@property (nonatomic, strong) IBOutlet ATBannerView *AdMobBanner;
+@property (nonatomic, strong) IBOutlet ATBannerView *ORMMABanner;
 @property (nonatomic, strong) IBOutlet ATBannerView *MRAIDBanner;
 
 @property (nonatomic, strong) IBOutlet UIView *contentSizeView;
@@ -28,7 +28,7 @@
 
 
 
-@implementation BannerViewController
+@implementation ContentSizeViewController
 
 - (void)viewDidLoad
 {
@@ -42,16 +42,15 @@
 	
 	[_interstitialBanner load];
 	
-	// AdMob	
-	self.AdMobBanner.configuration = [self configurationWithDomain:@"a.adtech.de" network:23 subNetwork:4 andAlias:@"sdkmedm2pri-bottom-5"];
-	self.AdMobBanner.viewController = self;
-	self.AdMobBanner.delegate = self;
+	// ORMMA	
+	self.ORMMABanner.configuration = [self configurationWithDomain:@"a.adtech.de" network:23 subNetwork:10 andAlias:@"test"];
+	self.ORMMABanner.viewController = self;
+	self.ORMMABanner.delegate = self;
 	
-	[self.AdMobBanner load];
+	[self.ORMMABanner load];
 	
 	// MRAID
 	self.MRAIDBanner.configuration = [self configurationWithDomain:@"a.adtech.de" network:23 subNetwork:10 andAlias:@"testmraid"];
-	self.MRAIDBanner.configuration.openLandingPagesThroughBrowser = NO;
 	self.MRAIDBanner.viewController = self;
 	self.MRAIDBanner.delegate = self;
 	
@@ -59,20 +58,20 @@
 	
 	// Show middle View size and set default values for static members
 	self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
-											self.AdMobBanner.frame.size.height,
+											self.ORMMABanner.frame.size.height,
 											self.contentSizeView.frame.size.width,
-											self.view.frame.size.height - self.AdMobBanner.frame.size.height - self.MRAIDBanner.frame.size.height
+											self.view.frame.size.height - self.ORMMABanner.frame.size.height - self.MRAIDBanner.frame.size.height
 											);
 	[self updateContentViewSizeLabel];
 	
-	_kAdMobBannerHeight = self.AdMobBanner.frame.size.height;
+	_kORMMABannerHeight = self.ORMMABanner.frame.size.height;
 	_kMRAIDBannerHeight = self.MRAIDBanner.frame.size.height;
 }
 
 - (void)viewDidUnload
 {
 	self.MRAIDBanner = nil;
-	self.AdMobBanner = nil;
+	self.ORMMABanner = nil;
 	self.contentSizeLabel = nil;
 	self.contentSizeView = nil;
 	
@@ -82,7 +81,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	self.MRAIDBanner.visible = YES;
-	self.AdMobBanner.visible = YES;
+	self.ORMMABanner.visible = YES;
 	
 	[super viewDidAppear:animated];
 }
@@ -92,12 +91,12 @@
 	[super viewDidDisappear:animated];
 	
 	self.MRAIDBanner.visible = NO;
-	self.AdMobBanner.visible = NO;
+	self.ORMMABanner.visible = NO;
 }
 
 - (IBAction)loadAdMobButtonPressed:(id)sender
 {
-	[self.AdMobBanner load];
+	[self.ORMMABanner load];
 }
 
 - (IBAction)loadMRAIDButtonPressed:(id)sender
@@ -157,14 +156,14 @@
 - (void)willResizeAd:(ATBannerView *)view toSize:(CGSize)size
 {
 	// Top banner resizes
-	if (self.AdMobBanner == view)
+	if (self.ORMMABanner == view)
 	{
-		_kAdMobBannerHeight = size.height;
+		_kORMMABannerHeight = size.height;
 		
 		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
-												_kAdMobBannerHeight,
+												_kORMMABannerHeight,
 												self.contentSizeView.frame.size.width,
-												self.view.frame.size.height - _kMRAIDBannerHeight - _kAdMobBannerHeight);
+												self.view.frame.size.height - _kMRAIDBannerHeight - _kORMMABannerHeight);
 	}
 	// Bottom banner resizes
 	else if (self.MRAIDBanner == view)
@@ -174,7 +173,7 @@
 		self.contentSizeView.frame = CGRectMake(self.contentSizeView.frame.origin.x,
 												self.contentSizeView.frame.origin.y,
 												self.contentSizeView.frame.size.width,
-												self.view.frame.size.height - _kMRAIDBannerHeight - _kAdMobBannerHeight);
+												self.view.frame.size.height - _kMRAIDBannerHeight - _kORMMABannerHeight);
 	}
 	
 	[self updateContentViewSizeLabel];

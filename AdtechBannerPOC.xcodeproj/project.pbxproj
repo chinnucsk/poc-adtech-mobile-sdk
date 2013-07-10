@@ -10,6 +10,10 @@
 		565CA62A178D7415008C6B68 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 565CA628178D7415008C6B68 /* libGoogleAdMobAds.a */; };
 		565CA62B178D7415008C6B68 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 565CA629178D7415008C6B68 /* README.txt */; };
 		565CA62D178D7498008C6B68 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565CA62C178D7498008C6B68 /* StoreKit.framework */; };
+		565CA633178DAABA008C6B68 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565CA632178DAABA008C6B68 /* MenuViewController.m */; };
+		565CA636178DAD6B008C6B68 /* MediationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565CA635178DAD6B008C6B68 /* MediationViewController.m */; };
+		565CA639178DAD94008C6B68 /* ImageAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565CA638178DAD94008C6B68 /* ImageAdViewController.m */; };
+		565CA63C178DADB2008C6B68 /* ImageResizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565CA63B178DADB2008C6B68 /* ImageResizeViewController.m */; };
 		566E6D9F178D38CE00904BB5 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E6D9E178D38CE00904BB5 /* VideoViewController.m */; };
 		5694869E1785632300DEE3C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5694869D1785632300DEE3C6 /* UIKit.framework */; };
 		569486A01785632300DEE3C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5694869F1785632300DEE3C6 /* Foundation.framework */; };
@@ -21,7 +25,7 @@
 		569486B21785632300DEE3C6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569486B11785632300DEE3C6 /* Default@2x.png */; };
 		569486B41785632400DEE3C6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569486B31785632400DEE3C6 /* Default-568h@2x.png */; };
 		569486B71785632400DEE3C6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569486B51785632400DEE3C6 /* MainStoryboard.storyboard */; };
-		569486BA1785632400DEE3C6 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 569486B91785632400DEE3C6 /* BannerViewController.m */; };
+		569486BA1785632400DEE3C6 /* ContentSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 569486B91785632400DEE3C6 /* ContentSizeViewController.m */; };
 		569486C11785647500DEE3C6 /* ADTECHMobileSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569486C01785647500DEE3C6 /* ADTECHMobileSDK.framework */; };
 		569486C31785649D00DEE3C6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569486C21785649D00DEE3C6 /* AdSupport.framework */; };
 		569486C5178564A600DEE3C6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569486C4178564A600DEE3C6 /* AudioToolbox.framework */; };
@@ -59,6 +63,14 @@
 		565CA628178D7415008C6B68 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = "GoogleAdMobAdsSdkiOS-6.4.2/libGoogleAdMobAds.a"; sourceTree = "<group>"; };
 		565CA629178D7415008C6B68 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = "GoogleAdMobAdsSdkiOS-6.4.2/README.txt"; sourceTree = "<group>"; };
 		565CA62C178D7498008C6B68 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		565CA631178DAABA008C6B68 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		565CA632178DAABA008C6B68 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		565CA634178DAD6B008C6B68 /* MediationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediationViewController.h; sourceTree = "<group>"; };
+		565CA635178DAD6B008C6B68 /* MediationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediationViewController.m; sourceTree = "<group>"; };
+		565CA637178DAD93008C6B68 /* ImageAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAdViewController.h; sourceTree = "<group>"; };
+		565CA638178DAD94008C6B68 /* ImageAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAdViewController.m; sourceTree = "<group>"; };
+		565CA63A178DADB2008C6B68 /* ImageResizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResizeViewController.h; sourceTree = "<group>"; };
+		565CA63B178DADB2008C6B68 /* ImageResizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResizeViewController.m; sourceTree = "<group>"; };
 		566E6D9D178D38CE00904BB5 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoViewController.h; path = AdtechBannerPOC/VideoViewController.h; sourceTree = "<group>"; };
 		566E6D9E178D38CE00904BB5 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoViewController.m; path = AdtechBannerPOC/VideoViewController.m; sourceTree = "<group>"; };
 		5694869A1785632300DEE3C6 /* AdtechBannerPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdtechBannerPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,8 +87,8 @@
 		569486B11785632300DEE3C6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		569486B31785632400DEE3C6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		569486B61785632400DEE3C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		569486B81785632400DEE3C6 /* BannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BannerViewController.h; path = AdtechBannerPOC/BannerViewController.h; sourceTree = "<group>"; };
-		569486B91785632400DEE3C6 /* BannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BannerViewController.m; path = AdtechBannerPOC/BannerViewController.m; sourceTree = "<group>"; };
+		569486B81785632400DEE3C6 /* ContentSizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContentSizeViewController.h; path = AdtechBannerPOC/ContentSizeViewController.h; sourceTree = "<group>"; };
+		569486B91785632400DEE3C6 /* ContentSizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ContentSizeViewController.m; path = AdtechBannerPOC/ContentSizeViewController.m; sourceTree = "<group>"; };
 		569486C01785647500DEE3C6 /* ADTECHMobileSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ADTECHMobileSDK.framework; path = ADTECHMobileSDK_iOS_3.2.2/Framework/ADTECHMobileSDK.framework; sourceTree = "<group>"; };
 		569486C21785649D00DEE3C6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		569486C4178564A600DEE3C6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -140,8 +152,16 @@
 		566E6DA0178D38F700904BB5 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				569486B81785632400DEE3C6 /* BannerViewController.h */,
-				569486B91785632400DEE3C6 /* BannerViewController.m */,
+				569486B81785632400DEE3C6 /* ContentSizeViewController.h */,
+				569486B91785632400DEE3C6 /* ContentSizeViewController.m */,
+				565CA637178DAD93008C6B68 /* ImageAdViewController.h */,
+				565CA638178DAD94008C6B68 /* ImageAdViewController.m */,
+				565CA63A178DADB2008C6B68 /* ImageResizeViewController.h */,
+				565CA63B178DADB2008C6B68 /* ImageResizeViewController.m */,
+				565CA634178DAD6B008C6B68 /* MediationViewController.h */,
+				565CA635178DAD6B008C6B68 /* MediationViewController.m */,
+				565CA631178DAABA008C6B68 /* MenuViewController.h */,
+				565CA632178DAABA008C6B68 /* MenuViewController.m */,
 				566E6D9D178D38CE00904BB5 /* VideoViewController.h */,
 				566E6D9E178D38CE00904BB5 /* VideoViewController.m */,
 			);
@@ -315,8 +335,12 @@
 			files = (
 				569486AA1785632300DEE3C6 /* main.m in Sources */,
 				569486AE1785632300DEE3C6 /* AppDelegate.m in Sources */,
-				569486BA1785632400DEE3C6 /* BannerViewController.m in Sources */,
+				569486BA1785632400DEE3C6 /* ContentSizeViewController.m in Sources */,
 				566E6D9F178D38CE00904BB5 /* VideoViewController.m in Sources */,
+				565CA633178DAABA008C6B68 /* MenuViewController.m in Sources */,
+				565CA636178DAD6B008C6B68 /* MediationViewController.m in Sources */,
+				565CA639178DAD94008C6B68 /* ImageAdViewController.m in Sources */,
+				565CA63C178DADB2008C6B68 /* ImageResizeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
