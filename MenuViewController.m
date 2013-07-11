@@ -19,19 +19,12 @@
 
 @end
 
+
+
 @implementation MenuViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-	{
-        
-    }
-    return self;
-}
-
-#pragma mark - Table view delegate & data source
+#pragma mark -
+#pragma mark Table view delegate & data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -99,41 +92,48 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self.menuTableView deselectRowAtIndexPath:indexPath animated:YES];
-
+	
+	NSString *segue = nil;
+	
 	switch (indexPath.row)
 	{
 		case 0:
 		{
-			[self performSegueWithIdentifier:@"contentSizeViewControllerSegue" sender:self];
+			segue = @"contentSizeViewControllerSegue";
 		}
 			break;
 
 		case 1:
 		{
-			[self performSegueWithIdentifier:@"mediationViewControllerSegue" sender:self];
+			segue = @"mediationViewControllerSegue";
 		}
 			break;
 				
 		case 2:
 		{
-			[self performSegueWithIdentifier:@"imageAdViewControllerSegue" sender:self];
+			segue = @"imageAdViewControllerSegue";
 		}
 			break;
 				
 		case 3:
 		{
-			[self performSegueWithIdentifier:@"videoViewControllerSegue" sender:self];
+			segue = @"videoViewControllerSegue";
 		}
 			break;
 			
 		case 4:
 		{
-			[self performSegueWithIdentifier:@"imageResizeViewController" sender:self];
+			segue = @"imageResizeViewController";
 		}
 			break;
 
 		default:
 			break;
+	}
+	
+	if (segue)
+	{
+		[self performSegueWithIdentifier:segue sender:self];
 	}
 }
 

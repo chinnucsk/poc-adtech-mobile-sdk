@@ -81,7 +81,8 @@ static NSString *const kVideoContentPath = @"http://devimages.apple.com/iphone/s
 	[_videoController stop];
 }
 
-#pragma mark - Buttons actions
+#pragma mark -
+#pragma mark Buttons actions
 
 - (IBAction)exitButtonPressed:(id)sender
 {

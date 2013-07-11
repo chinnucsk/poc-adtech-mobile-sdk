@@ -13,6 +13,7 @@
 @property (nonatomic, strong) IBOutlet ATBannerView *mediationBanner;
 
 - (IBAction)loadButtonPressed:(id)sender;
+- (IBAction)exitButtonPressed:(id)sender;
 
 @end
 
@@ -36,9 +37,17 @@
 	[self.mediationBanner load];
 }
 
+#pragma mark -
+#pragma mark Buttons actions
+
 - (IBAction)loadButtonPressed:(id)sender
 {
 	[self.mediationBanner load];
+}
+
+- (IBAction)exitButtonPressed:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

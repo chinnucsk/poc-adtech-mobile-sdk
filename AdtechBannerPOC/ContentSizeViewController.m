@@ -94,16 +94,6 @@
 	self.ORMMABanner.visible = NO;
 }
 
-- (IBAction)loadAdMobButtonPressed:(id)sender
-{
-	[self.ORMMABanner load];
-}
-
-- (IBAction)loadMRAIDButtonPressed:(id)sender
-{
-	[self.MRAIDBanner load];
-}
-
 - (void)updateContentViewSizeLabel
 {
 	self.contentSizeLabel.text = NSStringFromCGRect(self.contentSizeView.frame);
@@ -134,7 +124,26 @@
 	return configuration;
 }
 
-#pragma mark - ATInterstitialViewDelegate
+#pragma mark - 
+#pragma mark Buttons actions
+
+- (IBAction)loadAdMobButtonPressed:(id)sender
+{
+	[self.ORMMABanner load];
+}
+
+- (IBAction)loadMRAIDButtonPressed:(id)sender
+{
+	[self.MRAIDBanner load];
+}
+
+- (IBAction)exitButtonPressed:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark ATInterstitialViewDelegate
 
 - (void)didSuccessfullyFetchInterstitialAd:(ATInterstitialView*)view
 {
@@ -146,7 +155,8 @@
     _interstitialBanner = nil;
 }
 
-#pragma mark - ATBannerViewDelegate
+#pragma mark -
+#pragma mark ATBannerViewDelegate
 
 - (void)didFetchNextAd:(ATBannerView *)view
 {

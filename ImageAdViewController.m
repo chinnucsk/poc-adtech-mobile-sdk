@@ -13,6 +13,7 @@
 @property (nonatomic, strong) IBOutlet ATBannerView *imageBanner;
 
 - (IBAction)loadButtonPressed:(id)sender;
+- (IBAction)exitButtonPressed:(id)sender;
 
 @end
 
@@ -37,9 +38,17 @@
 	[self.imageBanner load];
 }
 
+#pragma mark -
+#pragma mark Buttons actions
+
 - (IBAction)loadButtonPressed:(id)sender
 {
 	[self.imageBanner load];
+}
+
+- (IBAction)exitButtonPressed:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
